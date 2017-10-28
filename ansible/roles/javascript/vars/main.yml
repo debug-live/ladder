@@ -1,0 +1,4 @@
+---
+# vars file for roles/javascript
+
+nvm_home: "{{ ansible_env.HOME }}/.nvm"
