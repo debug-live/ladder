@@ -1,4 +1,6 @@
 ---
 # vars file for roles/javascript
 
-nvm_home: "{{ ansible_env.HOME }}/.nvm"
+environment:
+  NVM_DIR: {{ ansible_env.HOME }}/.nvm
+  # PATH: /var/local/nvm/versions/node/v4.2.1/bin:{{ ansible_env.PATH }}

@@ -18,10 +18,10 @@
   when: not nvm_sh.stat.exists
 
 - name: install node latest
-  shell: "sudo -iu {{ ansible_user_id }} nvm install node"
+  shell: nvm install node
 
-# - name: install node lts
-#   shell: nvm install --lts
+- name: install node lts
+  shell: nvm install --lts
 
 - name: install cnpm/yarn/typescript
   npm:

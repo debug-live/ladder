@@ -1,2 +1,11 @@
 ---
 # tasks file for common
+
+- name: install python pip
+  become: yes
+  action: >
+    {{ ansible_pkg_mgr }} name={{ item }} state=present
+  with_items:
+    - gcc
+    - "{{ pkgs[ansible_os_family | lower] }}"
+  when: ansible_os_family != 'Darwin'
