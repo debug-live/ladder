@@ -1,0 +1,26 @@
+---
+# tasks file for java
+
+- name: install java, ...
+  command: sdk install {{ item }}
+  with_items:
+    - java
+    - maven
+    - gradle
+    - springboot
+    - groovy
+    - scala
+    - kotlin
+    - sbt
+
+- name: check install
+  command: sdk list {{ item }}
+  with_items:
+    - java
+    - maven
+    - gradle
+    - springboot
+    - groovy
+    - scala
+    - kotlin
+    - sbt

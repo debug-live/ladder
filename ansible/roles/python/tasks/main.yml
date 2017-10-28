@@ -1,0 +1,21 @@
+---
+# tasks file for roles/python
+
+# TODO: check 2.7 & 3.x, and install both of them
+
+- name: install virtualenvwrapper
+  pip: name=virtualenvwrapper state=present extra_args='--user'
+
+# does the pip module support the 'show' command?
+- name: get virtualenvwrapper
+  shell: pip show virtualenvwrapper
+  register: vew_info
+
+- name: get virtualenvwrapper path
+  set_fact:
+    vew_sh: "{{ vew_info.stdout_lines[-2].split()[1] | regex_replace('/lib/.*', '/bin') }}/virtualenvwrapper.sh"
+
+- name: source virtualenvwrapper.sh
+  lineinfile:
+    path: '{{ ansible_env.HOME }}/.bashrc'
+    line: '. {{ vew_sh | replace(ansible_env.HOME, "$HOME") }}'
