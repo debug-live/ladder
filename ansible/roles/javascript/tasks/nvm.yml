@@ -1,0 +1,15 @@
+---
+
+- name: create temp file
+  tempfile:
+  register: temp_nvm_sh
+
+- name: download nvm installation script
+  get_url:
+    dest: '{{ temp_nvm_sh.path }}'
+    url: https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh
+    force: yes
+    mode: u+x
+
+- name: run nvm installation script
+  shell: '{{ temp_nvm_sh.path }}'
