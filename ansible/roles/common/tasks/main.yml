@@ -1,10 +1,6 @@
 ---
 # tasks file for common
 
-- debug:
-    msg: '{{ environment }}'
-
-
 # - name: Check to see if curl is already installed
 #   command: "curl --version"
 #   ignore_errors: true
