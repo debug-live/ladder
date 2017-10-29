@@ -7,13 +7,14 @@
     creates: '{{ ansible_env.HOME }}/.nvm/nvm.sh'
 
 - name: install node
-  shell: 'source {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install {{ item }}'
+  shell: '. {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install {{ item }}'
   with_items: [ '{{ node_install_list }}' ]
 
 # TODO: set default
 
 - name: get the path of default node
-  shell: 'source {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm use --silent --lts && which node'
+  shell: '. {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm use --silent --lts && which node'
+  changed_when: false
   # with_items: [ '{{ node_install_list }}' ]
   # notify: show node info
   register: nodes_info

@@ -3,14 +3,17 @@
 
   vars:
     proxy_env:
-      http_proxy: 127.0.0.1:52016
+      http_proxy:  127.0.0.1:52016
       https_proxy: 127.0.0.1:52016
       socks_proxy: 127.0.0.1:52017
+
   # vars_files:
   #   - "vars/{{ ansible_os_family | lower }}.yml"
 
   roles:
     - common
+    - python
     - java
+    - javascript
 
   environment: '{{ proxy_env }}'
