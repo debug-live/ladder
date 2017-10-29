@@ -12,6 +12,8 @@
 
   roles:
     - common
+    - python
     - java
+    - javascript
 
   environment: '{{ proxy_env }}'
