@@ -1,0 +1,13 @@
+---
+- hosts: all
+
+  # vars_files:
+  #   - "vars/{{ ansible_os_family | lower }}.yml"
+
+  roles:
+    - javascript
+
+  environment:
+    http_proxy: 127.0.0.1:52016
+    https_proxy: 127.0.0.1:52016
+    socks_proxy: 127.0.0.1:52017

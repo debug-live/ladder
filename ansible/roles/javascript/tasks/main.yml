@@ -13,7 +13,7 @@
 # TODO: set default
 
 - name: get the path of default node
-  shell: 'source {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm use --lts && which node'
+  shell: 'source {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm use --silent --lts && which node'
   # with_items: [ '{{ node_install_list }}' ]
   # notify: show node info
   register: nodes_info
@@ -30,7 +30,7 @@
 
 - name: install JavaScript utilities
   vars:
-    bin_dir: '{{ nodes_info.stdout_lines[1] | dirname }}'
+    bin_dir: '{{ nodes_info.stdout | dirname }}'
   npm:
     name: '{{ item }}'
     global: yes
