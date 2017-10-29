@@ -2,6 +2,7 @@ import Reat from 'react';
 
 class FormComp extends Reat.Component {
     componentWillMount () {
+        const items = this.handleFetchData();
         this.selectedCheckboxes = new Set();
     };
 
@@ -15,7 +16,7 @@ class FormComp extends Reat.Component {
 
     handleFormSubmit(formSubmitEvent) {
         formSubmitEvent.preventDefault();
-
+        //FIX: formdata?
         axios.post('/xx', JSON.parse(data))
             .then(function (res) {
                 output.className = 'container';
@@ -26,6 +27,10 @@ class FormComp extends Reat.Component {
                 output.innerHTML = err.message;
             });
     };
+
+    handleFetchData() {
+        return axios.get('/list');
+    }
 
     createCheckbox = label => (
         <Checkbox
