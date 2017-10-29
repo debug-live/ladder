@@ -17,19 +17,41 @@
   fail: msg="failed to install nvm!"
   when: not nvm_sh.stat.exists
 
-- name: install node latest
-  shell: nvm install node
-
-- name: install node lts
-  shell: nvm install --lts
-
-- name: install cnpm/yarn/typescript
-  npm:
-    name: {{ item }}
-    registry: https://registry.npm.taobao.org
-    global: yes
-    state: absent
+- name: install node (latest and lts)
+  shell: "source {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install {{ item }}"
   with_items:
-    - cnpm
+     - --lts
+    #  - node
+
+###
+
+- name: change default node to lts (FIXME)
+  shell: 'source {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm use --lts'
+
+- name: get the path of default node
+  shell: 'source {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm which node'
+  register: node
+
+- set_fact:
+    node_bin: '{{ node.stdout | dirname }}'
+
+- debug:
+    msg: '{{ node_bin }}'
+
+- name: install JavaScript utilities
+  npm:
+    name: '{{ item }}'
+    global: yes
+    state: present
+    # registry: https://registry.npm.taobao.org
+    executable: '{{ node_bin }}/npm'
+  environment:
+    NVM_DIR: '{{ ansible_env.HOME }}/.nvm'
+    PATH: '{{ node_bin }}:{{ ansible_env.PATH }}'
+  with_items:
     - yarn
+    - cnpm
     - typescript
+    - bower
+    - grunt
+    - gulp
