@@ -23,6 +23,26 @@
   shell: curl https://bootstrap.pypa.io/get-pip.py | python
   when: pip_installed.rc != 0
 
+- name: get user site package path
+  command: python -m site --user-site
+  changed_when: false
+  register: user_site
+
+- name: get user site binary path
+  set_fact:
+    user_site_bin: '{{ user_site.stdout | regex_replace("/lib/.*", "/bin") }}'
+  changed_when: false
+
+# FIXME:
+- set_fact:
+    profile_path: '{{ ansible_env.HOME }}/.bash_profile'
+  when: ansible_os_family == 'Darwin'
+
+- name: 'add {{ user_site_bin }} to {{ profile_path }}'
+  lineinfile:
+    dest: '{{ profile_path }}'
+    line: 'export PATH={{ user_site_bin }}:$PATH'
+
 - name: install virtualenvwrapper
   pip: name=virtualenvwrapper state=present extra_args='--user'
   environment:
