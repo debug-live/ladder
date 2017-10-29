@@ -1,15 +1,19 @@
 ---
 # tasks file for common
 
-- name: Check to see if curl is already installed
-  command: "curl --version"
-  ignore_errors: true
-  changed_when: false
-  check_mode: no
-  register: curl_installed
+- debug:
+    msg: '{{ environment }}'
 
-- name: install curl
-  become: yes
-  action: >
-    {{ ansible_pkg_mgr }} name=curl state=present
-  when: curl_installed.rc != 0
+
+# - name: Check to see if curl is already installed
+#   command: "curl --version"
+#   ignore_errors: true
+#   changed_when: false
+#   check_mode: no
+#   register: curl_installed
+#
+# - name: install curl
+#   become: yes
+#   action: >
+#     {{ ansible_pkg_mgr }} name=curl state=present
+#   when: curl_installed.rc != 0
