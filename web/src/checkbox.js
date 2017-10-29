@@ -13,8 +13,6 @@ class Checkbox extends React.Component {
             ({ isChecked }) => ({
                 isChecked: !isChecked,
             })
-
-            handleC
         );
         handleCheckboxChange(label);
     }
