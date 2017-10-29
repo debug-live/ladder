@@ -21,3 +21,37 @@
   action: >
     {{ ansible_pkg_mgr }} name=curl state=present
   when: curl_installed.rc != 0
+
+- name: install bash completion
+  homebrew:
+    name: '{{ item }}-completion'
+    state: present
+  with_items:
+    - apm-bash
+    - bash
+    - cargo
+    - django
+    - docker
+    - docker-compose
+    - docker-machine
+    - gem
+    - gradle
+    - grunt
+    - maven
+    - pip
+    - rustc
+    - spring
+    - vagrant
+  when: ansible_os_family == 'Darwin'
+
+- name: update .bash_profile
+  lineinfile:
+    line: '[ -f $(brew --prefix)/etc/bash_completion ] && . $(brew --prefix)/etc/bash_completion'
+    dest: '{{ ansible_env.HOME }}//.bash_profile'
+  when: ansible_os_family == 'Darwin'
+
+- name: install git completion
+  get_url:
+    url: https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+    dest: /usr/local/etc/bash_completion.d/git-completion.bash
+  when: ansible_os_family == 'Darwin'
