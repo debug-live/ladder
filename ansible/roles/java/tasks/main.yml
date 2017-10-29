@@ -1,26 +1,25 @@
 ---
 # tasks file for java
 
-- name: install java, ...
-  command: sdk install {{ item }}
-  with_items:
-    - java
-    - maven
-    - gradle
-    - springboot
-    - groovy
-    - scala
-    - kotlin
-    - sbt
+- name: install sdkman
+  shell: curl -s "https://get.sdkman.io" | bash
+  args:
+    creates: '{{ ansible_env.HOME }}/.sdkman/bin/sdkman-init.sh'
 
-- name: check install
-  command: sdk list {{ item }}
-  with_items:
-    - java
-    - maven
-    - gradle
-    - springboot
-    - groovy
-    - scala
-    - kotlin
-    - sbt
+- name: install java-based languages
+  shell: '. {{ ansible_env.HOME }}/.sdkman/bin/sdkman-init.sh && sdk install {{ item }}'
+  environment:
+    SDKMAN_DIR: '{{ ansible_env.HOME }}/.sdkman'
+  with_items: '{{ java_lang_list }}'
+
+# - name: check install
+#   command: sdk list {{ item }}
+#   with_items:
+#     - java
+#     - maven
+#     - gradle
+#     - springboot
+#     - groovy
+#     - scala
+#     - kotlin
+#     - sbt
