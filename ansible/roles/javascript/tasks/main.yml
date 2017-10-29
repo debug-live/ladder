@@ -1,10 +1,14 @@
 ---
 # tasks file for roles/javascript
 
+- name: check if nvm is installed
+  stat:
+    path: '{{ ansible_env.HOME }}/.nvm/nvm.sh'
+  register: st
+
 - name: install nvm
-  shell: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
-  args:
-    creates: '{{ ansible_env.HOME }}/.nvm/nvm.sh'
+  include_tasks: nvm.yml
+  when: not st.stat.exists
 
 - name: install node
   shell: '. {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install {{ item }}'

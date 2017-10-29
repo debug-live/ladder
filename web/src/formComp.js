@@ -1,8 +1,11 @@
 import Reat from 'react';
+import Checkbox from './checkbox';
+import axios from 'axios';
 
+const items = {aa: "11",bb: "22",cc: "33"};
 class FormComp extends Reat.Component {
     componentWillMount () {
-        const items = this.handleFetchData();
+        //const items = this.handleFetchData();
         this.selectedCheckboxes = new Set();
     };
 
@@ -17,14 +20,14 @@ class FormComp extends Reat.Component {
     handleFormSubmit(formSubmitEvent) {
         formSubmitEvent.preventDefault();
         //FIX: formdata?
-        axios.post('/xx', JSON.parse(data))
+        axios.post('/xx', JSON.parse(items))
             .then(function (res) {
-                output.className = 'container';
-                output.innerHTML = res.data;
+                // output.className = 'container';
+                // output.innerHTML = res.data;
             })
             .catch(function (err) {
-                output.className = 'container text-danger';
-                output.innerHTML = err.message;
+                // output.className = 'container text-danger';
+                // output.innerHTML = err.message;
             });
     };
 
@@ -46,19 +49,11 @@ class FormComp extends Reat.Component {
 
     render() {
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-sm-12">
+            <form onSubmit={this.handleFormSubmit}>
+                {this.createCheckboxes(items)}
+                <button className="btn btn-default" type="submit">Save</button>
+            </form>
 
-                        <form onSubmit={this.handleFormSubmit}>
-                            {this.createCheckboxes(items)}
-
-                            <button className="btn btn-default" type="submit">Save</button>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
         );
     }
 }

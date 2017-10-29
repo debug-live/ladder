@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import FormComp from './formComp';
 
 class App extends Component {
   render() {
@@ -11,7 +12,7 @@ class App extends Component {
                 </header>
             </div>
             <div>
-                
+                <FormComp/>
             </div>
         </div>
     );
