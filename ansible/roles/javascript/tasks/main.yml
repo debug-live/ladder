@@ -14,6 +14,7 @@
 
 - name: get the path of default node
   shell: '. {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm use --silent --lts && which node'
+  changed_when: false
   # with_items: [ '{{ node_install_list }}' ]
   # notify: show node info
   register: nodes_info
