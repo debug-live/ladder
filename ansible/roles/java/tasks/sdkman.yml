@@ -1,0 +1,15 @@
+---
+
+- name: create temp file
+  tempfile:
+  register: temp_sdkman_sh
+
+- name: download sdkman installation script
+  get_url:
+    dest: '{{ temp_sdkman_sh.path }}'
+    url: https://get.sdkman.io
+    force: yes
+    mode: u+x
+
+- name: run sdkman installation script
+  shell: '{{ temp_sdkman_sh.path }}'
