@@ -20,8 +20,8 @@
 #   with_items:
 #     - "{{ pkgs[ansible_os_family | lower] }}"
 #   when: ansible_os_family != 'Darwin'
-  shell: curl https://bootstrap.pypa.io/get-pip.py | python
-  when: pip_installed.rc != 0
+  include_tasks: pip.yml
+  when: not st.stat.exists
 
 - name: get user site package path
   command: python -m site --user-site

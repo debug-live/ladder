@@ -1,0 +1,15 @@
+---
+
+- name: create temp file
+  tempfile:
+  register: temp_pip_py
+
+- name: download pip installation script
+  get_url:
+    dest: '{{ temp_pip_py.path }}'
+    url: https://bootstrap.pypa.io/get-pip.py
+    force: yes
+    mode: u+x
+
+- name: run pip installation script
+  shell: python '{{ temp_pip_py.path }}'
