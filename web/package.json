@@ -21,7 +21,7 @@
     "redux": "^3.7.2"
   },
   "scripts": {
-    "server": "json-server -p 3333 db.json",
+    "api-server": "json-server -p 3333 db.json",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
