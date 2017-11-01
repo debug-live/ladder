@@ -56,9 +56,7 @@ const Customer = withAxios(class MyComponentImpl extends React.Component {
 
         this.props.axios.put(this.url, this.state.customer)
             .then(response => {
-                console.log(response);
-                console.log(this.context);
-                // this.props.router.push('/build-status');
+                this.props.history.push('/build-status');
             })
             .catch(error => {
                 console.log(error);
