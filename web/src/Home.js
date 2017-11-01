@@ -7,8 +7,7 @@ const Home = withAxios(class MyComponentImpl extends React.Component {
         super(props);
         this.state = {firstName: '', age: 0};
 
-        this.handleChangeName = this.handleChangeName.bind(this);
-        this.handleChangeAge  = this.handleChangeAge.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -18,14 +17,9 @@ const Home = withAxios(class MyComponentImpl extends React.Component {
         })
     }
 
-    handleChangeName(event) {
-        // alert(event.target.age);
+    handleChange(event) {
+        // this.state[event.target.name] = event.target.value;
         this.setState({firstName: event.target.value});
-    }
-
-    handleChangeAge(event) {
-        // alert(event.target.age);
-        this.setState({age: event.target.value});
     }
 
     handleSubmit() {
@@ -41,12 +35,12 @@ const Home = withAxios(class MyComponentImpl extends React.Component {
                     <form onSubmit={this.handleSubmit}>
                         <label>
                             Name:
-                            <input value={this.state.firstName} onChange={this.handleChangeName}/>
+                            <input value={this.state.firstName} onChange={this.handleChange}/>
                         </label>
                         <br/>
                         <label>
                             Age:
-                            <input type="number" value={this.state.age} onChange={this.handleChangeAge}/>
+                            <input type="number" value={this.state.age} onChange={this.handleChange}/>
                         </label>
                         <br/>
                         <input type="submit" value="Submit"/>
@@ -58,6 +52,5 @@ const Home = withAxios(class MyComponentImpl extends React.Component {
         );
     }
 });
-
 
 export default Home;
