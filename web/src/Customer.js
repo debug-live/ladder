@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { withAxios } from 'react-axios';
 // import axios from 'axios';
 
-const Home = withAxios(class MyComponentImpl extends React.Component {
+const Customer = withAxios(class MyComponentImpl extends React.Component {
     constructor(props) {
         super(props);
         this.state = {customer: { // fixme
@@ -16,7 +16,11 @@ const Home = withAxios(class MyComponentImpl extends React.Component {
     }
 
     componentWillMount() {
-        this.props.axios('/api/customers/6').then(result => {
+
+        let id = this.props.match.params.id;
+        this.url = `/api/customers/${id}`;
+
+        this.props.axios(this.url).then(result => {
             this.setState({customer: result.data});
         })
     }
@@ -50,13 +54,13 @@ const Home = withAxios(class MyComponentImpl extends React.Component {
         //     .then(data => console.log(data))
         //     .catch(e => console.log("Oops, error", e));
 
-        this.props.axios.put('/api/customers/6', this.state.customer)
-            .then(function (response) {
-                // console.log(response);
+        this.props.axios.put(this.url, this.state.customer)
+            .then(response => {
+                console.log(response);
+                console.log(this.context);
                 // this.props.router.push('/build-status');
-                console.log(this);
             })
-            .catch(function (error) {
+            .catch(error => {
                 console.log(error);
             });
     }
@@ -67,7 +71,7 @@ const Home = withAxios(class MyComponentImpl extends React.Component {
                 <h5>User info</h5>
 
                 <div>
-                    <form id='xxx' onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit}>
                         <label>
                             Name:
                             <input type="text" name='firstName' value={this.state.customer.firstName} onChange={this.handleChange}/>
@@ -88,4 +92,4 @@ const Home = withAxios(class MyComponentImpl extends React.Component {
     }
 });
 
-export default Home;
+export default Customer;
