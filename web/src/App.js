@@ -4,6 +4,10 @@ import Routes from './Routes';
 
 class App extends Component {
   render() {
+      // let a = {x: 11, y: 22};
+      // const {b} = a;
+      // console.log(b);
+
     return (
       <div className="App">
         <header className="App-header">

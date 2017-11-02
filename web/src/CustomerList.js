@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { withAxios } from 'react-axios';
 
-const Home = withAxios(class MyComponentImpl extends React.Component {
+class CustomerList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {customer: []};
     }
 
     componentWillMount() {
@@ -15,14 +15,22 @@ const Home = withAxios(class MyComponentImpl extends React.Component {
     }
 
     render() {
+        let customers = this.state.customer;
+
         return (
             <div>
                 <h3>User List</h3>
-                <h5><Link to='/customer/6'>customer 6</Link></h5>
+                <ol>
+                {
+                    customers.map(x => (
+                        <li key={x.id}><Link to={`/customer/${x.id}`}>{x.firstName}</Link></li>
+                    ))
+                }
+                </ol>
                 <h5><Link to='/about'>About us</Link></h5>
             </div>
         );
     }
-});
+}
 
-export default Home;
+export default withAxios(CustomerList);

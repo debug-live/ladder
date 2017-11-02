@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { withAxios } from 'react-axios';
 // import axios from 'axios';
 
-const Customer = withAxios(class MyComponentImpl extends React.Component {
+class CustomerDetail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {customer: { // fixme
@@ -88,6 +88,6 @@ const Customer = withAxios(class MyComponentImpl extends React.Component {
             </div>
         );
     }
-});
+}
 
-export default Customer;
+export default withAxios(CustomerDetail);
