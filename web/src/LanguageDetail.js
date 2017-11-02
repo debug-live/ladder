@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom';
 import { withAxios } from 'react-axios';
 // import axios from 'axios';
 
-class CustomerDetail extends React.Component {
+class LanguageDetail extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {customer: { // fixme
-            firstName: '',
-            age: 0
+        this.state = {language: { // fixme
+            id: 0,
+            name: '',
+            desc: ''
         }};
 
         this.handleChange = this.handleChange.bind(this);
@@ -18,24 +19,19 @@ class CustomerDetail extends React.Component {
     componentWillMount() {
 
         let id = this.props.match.params.id;
-        this.url = `/api/customers/${id}`;
+        this.url = `/api/languages/${id}`;
 
         this.props.axios(this.url).then(result => {
-            this.setState({customer: result.data});
+            this.setState({language: result.data});
         })
     }
 
-    // POST:  URL=/api/customers, DATA
-    // GET:   URL=/api/customers/:id
-    // PUT:   URL=/api/customers/:id DATA
-    // DELETE:URL=/api/customers/:id
-
     // bad performance
     handleChange(event) {
-        let customer = Object.assign({}, this.state.customer);
-        customer[event.target.name] = event.target.value;
+        let language = Object.assign({}, this.state.language);
+        language[event.target.name] = event.target.value;
         // alert(event.target);
-        this.setState({customer: customer});
+        this.setState({language: language});
     }
 
     handleSubmit(event) {
@@ -54,7 +50,7 @@ class CustomerDetail extends React.Component {
         //     .then(data => console.log(data))
         //     .catch(e => console.log("Oops, error", e));
 
-        this.props.axios.put(this.url, this.state.customer)
+        this.props.axios.put(this.url, this.state.language)
             .then(response => {
                 this.props.history.push('/build-status');
             })
@@ -72,12 +68,12 @@ class CustomerDetail extends React.Component {
                     <form onSubmit={this.handleSubmit}>
                         <label>
                             Name:
-                            <input type="text" name='firstName' value={this.state.customer.firstName} onChange={this.handleChange}/>
+                            <input type="text" name='name' value={this.state.language.name} onChange={this.handleChange}/>
                         </label>
                         <br/>
                         <label>
-                            Age:
-                            <input type="number" name='age' value={this.state.customer.age} onChange={this.handleChange}/>
+                            Desc:
+                            <input type="text" name='desc' value={this.state.language.desc} onChange={this.handleChange}/>
                         </label>
                         <br/>
                         <input type="submit" value="Submit"/>
@@ -90,4 +86,4 @@ class CustomerDetail extends React.Component {
     }
 }
 
-export default withAxios(CustomerDetail);
+export default withAxios(LanguageDetail);
