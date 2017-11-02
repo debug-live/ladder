@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { withAxios } from 'react-axios';
+import { ListGroup, ListGroupItem } from 'reactstrap';
 
 class LanguageList extends React.Component {
     constructor(props) {
@@ -23,7 +24,9 @@ class LanguageList extends React.Component {
                 <ol>
                 {
                     languages.map(lang => (
-                        <li key={lang.id}><Link to={`/languages/${lang.id}`}>{lang.desc}</Link></li>
+                        <ListGroup>
+                        <ListGroupItem key={lang.id}><Link to={`/languages/${lang.id}`}>{lang.desc}</Link></ListGroupItem>
+                        </ListGroup>
                     ))
                 }
                 </ol>
