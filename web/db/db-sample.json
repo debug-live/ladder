@@ -31,5 +31,6 @@
       "name": "atom",
       "desc": "Atom"
     }
-  ]
+  ],
+  "build": []
 }

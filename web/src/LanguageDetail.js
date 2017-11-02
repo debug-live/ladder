@@ -17,11 +17,8 @@ class LanguageDetail extends React.Component {
     }
 
     componentWillMount() {
-
         let id = this.props.match.params.id;
-        this.url = `/api/languages/${id}`;
-
-        this.props.axios(this.url).then(result => {
+        this.props.axios(`/api/languages/${id}`).then(result => {
             this.setState({language: result.data});
         })
     }
@@ -50,7 +47,9 @@ class LanguageDetail extends React.Component {
         //     .then(data => console.log(data))
         //     .catch(e => console.log("Oops, error", e));
 
-        this.props.axios.put(this.url, this.state.language)
+        let build = {name: this.state.language.name};
+
+        this.props.axios.post(`/api/build`, build)
             .then(response => {
                 this.props.history.push('/build-status');
             })
