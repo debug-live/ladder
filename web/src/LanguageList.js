@@ -21,15 +21,13 @@ class LanguageList extends React.Component {
         return (
             <div>
                 <h3>Language List</h3>
-                <ol>
+                <ListGroup>
                 {
                     languages.map(lang => (
-                        <ListGroup>
                         <ListGroupItem key={lang.id}><Link to={`/languages/${lang.id}`}>{lang.desc}</Link></ListGroupItem>
-                        </ListGroup>
                     ))
                 }
-                </ol>
+                </ListGroup>
                 <h5><Link to='/about'>About us</Link></h5>
             </div>
         );
