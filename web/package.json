@@ -5,12 +5,14 @@
   "proxy": {
     "/api": {
       "target": "http://localhost:3333",
-      "pathRewrite": {"^/api" : ""}
+      "pathRewrite": {
+        "^/api": ""
+      }
     }
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "material-ui": "^0.19.4",
+    "material-ui": "^1.0.0-beta.19",
     "react": "^15.6.2",
     "react-axios": "^1.0.3",
     "react-dom": "^15.6.2",
