@@ -64,15 +64,15 @@ class LanguageList extends React.Component {
                             key={lang.id}
                             dense
                             button
-                            onClick={this.handleToggle(lang.id)}
                             className={classes.listItem}
                         >
-                            <Checkbox
-                                checked={this.state.checked.indexOf(lang.id) !== -1}
-                                tabIndex={-1}
-                                disableRipple
-                            />
-                            <li key={lang.id}><Link to={`/languages/${lang.id}`}>{lang.desc}</Link></li>
+                        <Checkbox
+                            // checked={this.state.checked.indexOf(lang.id) !== -1}
+                            tabIndex={-1}
+                            onClick={this.handleToggle(lang.id)}
+                            disableRipple
+                        />
+                        <Link to={`/languages/${lang.id}`}>{lang.desc}</Link>
                             {/*<ListItemText primary={`${lang.desc}`} />*/}
                         </ListItem>
                     ))}
