@@ -10,13 +10,11 @@
   },
   "languages": [
     {
-      "id": 1,
-      "name": "cxx",
+      "id": "cxx",
       "desc": "C/C++"
     },
     {
-      "id": 2,
-      "name": "java",
+      "id": "java",
       "desc": "Java"
     }
   ],
