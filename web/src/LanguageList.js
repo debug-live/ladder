@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { withAxios } from 'react-axios';
+import { ListGroup, ListGroupItem, Input } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.css';
 
 class LanguageList extends React.Component {
     constructor(props) {
@@ -20,13 +22,16 @@ class LanguageList extends React.Component {
         return (
             <div>
                 <h3>Language List</h3>
-                <ol>
+                <ListGroup>
                 {
                     languages.map(lang => (
-                        <li key={lang.id}><Link to={`/languages/${lang.id}`}>{lang.desc}</Link></li>
+                        <ListGroupItem key={lang.id}>
+                            <Input type="checkbox" />
+                            <Link to={`/languages/${lang.id}`}>{lang.desc}</Link>
+                        </ListGroupItem>
                     ))
                 }
-                </ol>
+                </ListGroup>
                 <h5><Link to='/about'>About us</Link></h5>
             </div>
         );
