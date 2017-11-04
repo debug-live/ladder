@@ -6,6 +6,6 @@ localhost
 xenial-node4
 
 [master:vars]
-http_proxy  = 127.0.0.1:52016
-https_proxy = 127.0.0.1:52016
-socks_proxy = 127.0.0.1:52017
+http_proxy  = http://127.0.0.1:38251
+https_proxy = http://127.0.0.1:38251
+socks_proxy = 127.0.0.1:38250
