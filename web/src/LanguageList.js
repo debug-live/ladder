@@ -7,9 +7,10 @@ import 'bootstrap/dist/css/bootstrap.css';
 class LanguageList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {languages: []};
+        this.state = {languages: [], buildList: []};
 
-        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleToggle = this.handleToggle.bind(this);
     }
 
     componentWillMount() {
@@ -18,16 +19,28 @@ class LanguageList extends React.Component {
         })
     }
 
-    handleChange() {
-        var data = {list :[{name:'b', desc: "xx"}]};
-        this.props.axios.post('/api/build', data).then(result => {
-            console.log(result);
+    handleToggle = index => () => {
+        const {buildList} = this.state;
+        const currentIndex = buildList.indexOf(index);
+        const newList = [...buildList];
+
+        if ( currentIndex === -1) {
+            newList.push(index);
+        } else {
+            newList.splice(currentIndex, 1);
+        }
+
+        this.setState({buildList: newList});
+    };
+
+    handleSubmit() {
+        let { buildList } = this.state;
+
+        this.props.axios.post('/api/build', {list: buildList}).then(result => {
             if(result.status === 201) {
-                this.props.history.push('/build-status', data);
+                this.props.history.push('/build-status', buildList);
             }
         });
-        console.log(this.state.languages);
-        console.log(this.props);
     }
 
     render() {
@@ -40,13 +53,13 @@ class LanguageList extends React.Component {
                 {
                     languages.map(lang => (
                         <ListGroupItem key={lang.id}>
-                            <Input type="checkbox" />
+                            <Input type="checkbox" onClick={this.handleToggle(lang.id)}/>
                             <Link to={`/languages/${lang.id}`}>{lang.desc}</Link>
                         </ListGroupItem>
                     ))
                 }
                 </ListGroup><br/>
-                <Button color='secondary' onClick={this.handleChange}>Build</Button>
+                <Button color='secondary' onClick={this.handleSubmit}>Build</Button>
                 {/*<h5><Link to='/about'>About us</Link></h5>*/}
             </div>
         );

@@ -6,31 +6,17 @@ import 'bootstrap/dist/css/bootstrap.css';
 class About extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            languages: [{id: '1', desc: 'aa'}, {id: '2', desc: 'bb'}],
-        };
+        this.buildList = this.props.location.state;
     }
 
     render() {
-        let languages = this.state.languages;
-
         return(
             <div>
                 <h3>Language List</h3>
                 <ListGroup>
                     {
-                        languages.map(lang => (
-                            <ListGroupItem key={lang.id}>
-                                {lang.desc}<br/>
-                                {/*<ListGroup>*/}
-                                    {/*{*/}
-                                        {/*lans.map(lang => (*/}
-                                            {/*<ListGroupItem key={lang.id}>*/}
-                                            {/*</ListGroupItem>*/}
-                                        {/*))*/}
-                                    {/*}*/}
-                                {/*</ListGroup>*/}
-                            </ListGroupItem>
+                        this.buildList.map(lang => (
+                            <ListGroupItem key={lang}>{lang}</ListGroupItem>
                         ))
                     }
                 </ListGroup>
