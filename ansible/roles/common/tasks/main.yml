@@ -9,18 +9,18 @@
     state: link
   when: ansible_os_family == 'Debian'
 
-- name: Check to see if curl is already installed
-  command: "curl --version"
-  ignore_errors: true
-  changed_when: false
-  check_mode: no
-  register: curl_installed
-
-- name: install curl
-  become: yes
-  action: >
-    {{ ansible_pkg_mgr }} name=curl state=present
-  when: curl_installed.rc != 0
+#- name: Check to see if curl is already installed
+#  command: "curl --version"
+#  ignore_errors: true
+#  changed_when: false
+#  check_mode: no
+#  register: curl_installed
+#
+#- name: install curl
+#  become: yes
+#  action: >
+#    {{ ansible_pkg_mgr }} name=curl state=present
+#  when: curl_installed.rc != 0
 
 - name: install bash completion
   homebrew:
@@ -42,6 +42,13 @@
     - rustc
     - spring
     - vagrant
+  when: ansible_os_family == 'Darwin'
+
+# FIXME
+- name: touch .bash_profile
+  file:
+    path: '{{ ansible_env.HOME }}//.bash_profile'
+    state: touch
   when: ansible_os_family == 'Darwin'
 
 - name: update .bash_profile

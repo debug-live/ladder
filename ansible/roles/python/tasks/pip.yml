@@ -12,4 +12,5 @@
     mode: u+x
 
 - name: run pip installation script
-  shell: python '{{ temp_pip_py.path }}'
+  become: yes
+  shell: python {{ temp_pip_py.path }} --prefix=/usr
