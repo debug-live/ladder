@@ -21,7 +21,7 @@
 #     - "{{ pkgs[ansible_os_family | lower] }}"
 #   when: ansible_os_family != 'Darwin'
   include_tasks: pip.yml
-  when: not st.stat.exists
+  when: not pip_installed
 
 - name: get user site package path
   command: python -m site --user-site

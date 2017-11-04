@@ -10,6 +10,7 @@
     url: https://get.sdkman.io
     force: yes
     mode: u+x
+    use_proxy: yes
 
 - name: run sdkman installation script
   shell: '{{ temp_sdkman_sh.path }}'
