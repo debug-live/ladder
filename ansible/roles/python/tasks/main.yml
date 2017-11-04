@@ -33,11 +33,6 @@
     user_site_bin: '{{ user_site.stdout | regex_replace("/lib/.*", "/bin") }}'
   changed_when: false
 
-# FIXME:
-- set_fact:
-    profile_path: '{{ ansible_env.HOME }}/.bash_profile'
-  when: ansible_os_family == 'Darwin'
-
 - name: 'add {{ user_site_bin }} to {{ profile_path }}'
   lineinfile:
     dest: '{{ profile_path }}'
