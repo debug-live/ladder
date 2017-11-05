@@ -5,12 +5,13 @@
   register: temp_sdkman_sh
 
 - name: download sdkman installation script
-  get_url:
-    dest: '{{ temp_sdkman_sh.path }}'
-    url: https://get.sdkman.io
-    force: yes
-    mode: u+x
-    use_proxy: yes
+  shell: curl -o '{{temp_sdkman_sh.path}}' https://get.sdkman.io
+  #get_url:
+  #  dest: '{{ temp_sdkman_sh.path }}'
+  #  url: https://get.sdkman.io
+  #  force: yes
+  #  mode: u+x
+  #  use_proxy: yes
 
 - name: run sdkman installation script
-  shell: '{{ temp_sdkman_sh.path }}'
+  shell: sh '{{ temp_sdkman_sh.path }}'
