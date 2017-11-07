@@ -27,10 +27,13 @@
 #    {{ ansible_pkg_mgr }} name=curl state=present
 #  when: not curl_installed
 
-- name: install git
+- name: install git, vagrant
   become: '{{ pm_become }}'
   action: >
-    {{ ansible_pkg_mgr }} name=git state=present
+    {{ ansible_pkg_mgr }} name={{ item }} state=present
+  with_items:
+    - git
+    - vagrant
 
 - name: macOS init
   include_tasks: macos.yml
