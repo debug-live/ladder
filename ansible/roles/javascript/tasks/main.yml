@@ -10,6 +10,7 @@
   include_tasks: nvm.yml
   when: not nvm.stat.exists
 
+# TODO: --lts=carbon/boron
 - name: install node
   shell: '. {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install {{ item }}'
   with_items: [ '{{ node_install_list }}' ]
