@@ -5,7 +5,7 @@
   register: temp_nvm_sh
 
 - name: download nvm installation script
-  curl: curl -o '{{ temp_nvm_sh.path }}' https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh
+  shell: curl -o '{{ temp_nvm_sh.path }}' https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh
   #get_url:
   #  dest: '{{ temp_nvm_sh.path }}'
   #  url: https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh
@@ -13,4 +13,4 @@
   #  mode: u+x
 
 - name: run nvm installation script
-  shell: sh '{{ temp_nvm_sh.path }}'
+  shell: bash '{{ temp_nvm_sh.path }}'

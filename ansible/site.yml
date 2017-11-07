@@ -13,9 +13,9 @@
 
   roles:
     - common
-  #  - python
-  #  - java
-  #  - javascript
+    - python
+    - java
+    - javascript
 
   environment:
     http_proxy:  '{{http_proxy | default ("") }}'

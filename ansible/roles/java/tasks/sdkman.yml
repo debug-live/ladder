@@ -14,4 +14,4 @@
   #  use_proxy: yes
 
 - name: run sdkman installation script
-  shell: sh '{{ temp_sdkman_sh.path }}'
+  shell: bash '{{ temp_sdkman_sh.path }}'

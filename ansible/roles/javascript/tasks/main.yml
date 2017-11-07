@@ -4,11 +4,11 @@
 - name: check if nvm is installed
   stat:
     path: '{{ ansible_env.HOME }}/.nvm/nvm.sh'
-  register: st
+  register: nvm
 
 - name: install nvm
   include_tasks: nvm.yml
-  when: not st.stat.exists
+  when: not nvm.stat.exists
 
 - name: install node
   shell: '. {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install {{ item }}'
