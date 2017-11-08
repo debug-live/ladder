@@ -12,13 +12,15 @@ def index(request):
 
 
 def get_languages(request):
-    languages = [{
+    languages = {
+        'data': [{
           "id": "cxx",
           "desc": "C/C++"
-        },
-        {
+        }, {
           "id": "java",
           "desc": "Java"
-        }]
+        }],
+        'sign': '0'
+    }
 
-    return JsonResponse(languages, safe=False)
+    return JsonResponse(languages)
